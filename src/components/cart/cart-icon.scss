@@ -1,0 +1,25 @@
+@import '../../variables.scss';
+
+.cart-icon {
+    height: 2.8rem;
+    width: 2.8rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    svg {
+        height: 1.7rem;
+        width: 1.7rem;
+        color: $color-black;
+    }
+
+    &__count {
+        position: absolute;
+        font-size: .7rem;
+        font-weight: 600;
+        bottom: 12px;
+    }
+}
+

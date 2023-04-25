@@ -1,0 +1,30 @@
+@import '../../variables.scss';
+
+.cart-dropdown {
+    height: 21rem;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid $color-black;
+    position: absolute;
+    top: 90px;
+    right: 40px;
+    z-index: 5;
+    background-color: #fff;
+
+    &__items {
+        height: 20rem;
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+          }
+    }
+
+    .btn {
+        margin: auto;
+    }
+}

@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+
+.shop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem 1rem;
+
+    @media screen and (max-width: $screen-size-md){
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: $screen-size-sm){
+        grid-template-columns: repeat(1, 1fr);
+        gap: 3rem;
+    }
+}

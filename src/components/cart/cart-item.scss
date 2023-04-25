@@ -1,0 +1,31 @@
+@import "../../variables.scss";
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 1rem;
+
+    img {
+        width: 30%;
+        height: 5rem;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__name {
+        font-weight: 600;
+    }
+
+    &__details {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: .5rem 1rem;
+        font-size: .9rem;
+    }
+}

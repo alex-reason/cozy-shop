@@ -1,0 +1,22 @@
+@import '../../variables.scss';
+
+.authentication {
+    h2 {
+        font-size: $font-size-h2;
+        font-weight: 500;
+    }
+
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: 800px ){
+        flex-direction: column;
+        margin: 1rem;
+    }
+
+    & > * {
+        @media screen and (max-width: 800px ){
+            margin: 1.5rem;
+        }
+    }
+}

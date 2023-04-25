@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Anuphan:wght@100;200;300;400;500;600;700&display=swap");
+
+@import "./variables.scss";
+
+body {
+  margin: 0;
+  padding: 1rem 2.5rem;
+  font-family: "Anuphan", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: $color-black;
+}
+
+.btn {
+  border: 1px solid $color-black;
+  border-radius: 3px;
+  padding: 0.5rem;
+  width: 10rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+
+  &--normal {
+    color: $color-white;
+    background-color: $color-black;
+
+    &:hover {
+      color: $color-black;
+      background-color: $color-white;
+    }
+  }
+
+  &--blue {
+    border: 1px solid $color-blue;
+    background-color: $color-blue;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-black;
+      border: 1px solid $color-black;
+    }
+  }
+
+  &--invert {
+    color: $color-black;
+    background-color: $color-white;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-black;
+    }
+  }
+}
+
+.error {
+  color: #e83131;
+}

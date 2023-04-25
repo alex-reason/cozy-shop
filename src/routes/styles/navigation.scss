@@ -1,0 +1,32 @@
+@import '../../variables.scss';
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+
+    &__logo-container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__links-container {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__link {
+        padding: 0.5rem 1rem;
+        color: $color-black;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &:last-of-type {
+            padding-right: 0;
+        }
+    }
+}
