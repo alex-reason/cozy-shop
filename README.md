@@ -1,1 +1,1 @@
-This is a sample/practice online store create with create-react-app. 
+This is a sample/practice online store create with create-react-app. The project applies what I learned from the Udemy course: Complete React Developer in 2023 (w/ Redux, Hooks, GraphQL) by Andrei Neagoie and Yihua Zhang.
