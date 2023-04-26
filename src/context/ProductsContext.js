@@ -10,7 +10,7 @@ export const ProductsProvider = ({children}) => {
     const [products, setProducts] = useState(PRODUCTS);
 
     return (
-        <ProductsContext.Provider value={{products}}>
+        <ProductsContext.Provider value={{products, setProducts}}>
             {children}
         </ProductsContext.Provider>
     )

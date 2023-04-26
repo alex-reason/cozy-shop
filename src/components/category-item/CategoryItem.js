@@ -3,7 +3,7 @@ import './category-item.scss';
 const CategoryItem = ({ category }) => {
   const { imageUrl, title, alt } = category;
   return (
-    <div className='category-container'>
+    <div className='category-item'>
       <div
         className='background-image'
         style={{
@@ -11,7 +11,7 @@ const CategoryItem = ({ category }) => {
         }}
         title={alt}
       />
-      <div className='category-body-container'>
+      <div className='category-item__inner'>
         <h2>{title}</h2>
         <p>Shop Now</p>
       </div>

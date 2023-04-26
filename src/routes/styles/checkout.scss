@@ -1,0 +1,63 @@
+@import "../../variables.scss";
+
+.checkout {
+    margin: auto;
+    width: 70%;
+
+    h2 {
+        margin: auto;
+        text-align: center;
+    }
+
+    &__headings,
+    &__row {
+        display: grid;
+        grid-template-columns: (repeat(5, 1fr));
+        justify-items: center;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__row {
+        font-size: $font-size-p;
+
+        img {
+            width: 100%;
+            height: 5rem;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    &__headings {
+        font-size: $font-size-h3;
+    }
+
+    &__quantity {
+        display: flex;
+        align-items: center;
+
+        svg {
+            cursor: pointer;
+            margin: 0 1rem;
+        }
+
+        p {
+            font-weight: 600;
+        }
+    }
+
+    &__total {
+        border-top: 1px solid $color-black;
+        font-weight: 600;
+        text-align: right;
+        padding: 1rem;
+        padding-right: 2rem;
+    }
+
+    &__remove {
+        cursor: pointer;
+        font-weight: 800;
+    }
+}

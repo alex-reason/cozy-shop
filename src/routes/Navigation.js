@@ -21,7 +21,6 @@ const Navigation = () => {
             <nav className='nav'>
                 <Link className='nav__logo-container' to='/'>
                     <CoffeeLogo /> Cozy
-                    {currentUser && <p>{currentUser.displayName}</p>}
                 </Link>
 
                 <div className='nav__links-container'>
