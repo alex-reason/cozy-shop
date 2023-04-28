@@ -2,7 +2,7 @@
 
 .category-item {
   min-width: 30%;
-  height: 240px;
+  height: 300px;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -13,8 +13,6 @@
   border-radius: 3px;
 
   &:hover {
-    cursor: pointer;
-
     & .background-image {
       transform: scale(1.1);
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
@@ -23,18 +21,6 @@
     & .category-item__inner {
       opacity: 0.9;
     }
-  }
-
-  &.large {
-    height: 380px;
-  }
-
-  &:first-child {
-    margin-right: 7.5px;
-  }
-
-  &:last-child {
-    margin-left: 7.5px;
   }
 
   .background-image {
@@ -47,14 +33,18 @@
   &__inner {
     height: 90px;
     padding: 0 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     opacity: 0.7;
     position: absolute;
     background-color: $color-white;
     border: 1px solid $color-black;
+    cursor: pointer;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
     h2 {
       font-weight: 600;

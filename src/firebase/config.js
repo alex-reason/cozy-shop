@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from 'firebase/firestore';
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD7Ul1_9-uNvhPpTfNE1TG67X7vgwAyxTU",
@@ -18,13 +18,16 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
+
 // google provider
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
     prompt: "select_account"
 });
 
-// create userDoc
+// EXPORTS
+
+//-- create userDoc --//
 export const createUserDocFromAuth = async (userAuth, additionalInfo = {}) => {
     if (!userAuth) return;
 
@@ -50,8 +53,34 @@ export const createUserDocFromAuth = async (userAuth, additionalInfo = {}) => {
     return userDocRef;
 }
 
-//exports
-//--google sign in/ sign up-- //
+//--collections and adding documents--//
+export const addCollectionsAndDocs = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db);
+
+    objectsToAdd.forEach((object) => {
+        const docRef = doc(collectionRef, object.title.toLowerCase());
+        batch.set(docRef, object);
+    })
+
+    await batch.commit();
+    console.log('done')
+};
+
+//--retrieve specific category from collection--//
+export const getCategoriesAndDocs = async (category) => {
+    const collectionRef = collection(db, category);
+    const q = query(collectionRef);
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc,docSnapShot) => {
+        const {title, items} = docSnapShot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {})
+    return categoryMap;
+}
+
+//-- google sign in/ sign up -- //
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 //-- sign in/ sign up with email/password-- //
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -62,7 +91,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password)
 }
-//sign out
+// -- sign out -- //
 export const signOutUser = async () => await signOut(auth);
 // listen to auth changes
 export const authChangeListener = (callback) => onAuthStateChanged(auth, callback);

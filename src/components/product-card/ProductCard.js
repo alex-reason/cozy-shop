@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
 
     const handleClick = () => {
         addItemToCart(product)
-    }
+    };
 
     return (
         <div className='product-card'>

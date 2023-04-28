@@ -1,0 +1,12 @@
+@import '../../variables.scss';
+
+.category-preview {
+    margin-bottom: 3rem;
+    
+    &__products {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+}
