@@ -8,14 +8,13 @@
 
 .form-input {
     position: relative;
-    margin: 3rem 1rem;
 
     &__input {
         background: none;
         background-color: $color-white;
         color: $color-grey;
         font-size: 18px;
-        padding: 1rem;
+        padding: .5rem 1rem;
         display: block;
         width: 100%;
         border: none;
@@ -42,7 +41,7 @@
         font-weight: 400;
         position: absolute;
         pointer-events: none;
-        left: 1rem;
+        left: 16px;
         top: 10px;
         transition: 300ms ease all;
 

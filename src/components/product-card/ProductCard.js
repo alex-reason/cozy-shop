@@ -1,6 +1,6 @@
 import './product-card.scss';
 import { useContext } from 'react';
-import { CartContext } from '../../context/CartContext';
+import { CartContext } from '../../context/CartContext2';
 
 const ProductCard = ({ product }) => {
     const { name, price, imageUrl, alt } = product;

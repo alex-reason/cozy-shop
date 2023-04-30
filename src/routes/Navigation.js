@@ -3,7 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import { signOutUser } from "../firebase/config";
 
 import { AuthContext } from "../context/AuthContext";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../context/CartContext2";
 
 import { ReactComponent as CoffeeLogo } from '../assets/coffee.svg'
 import CartIcon from "../components/cart/CartIcon";

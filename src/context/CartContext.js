@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-
 // ------ helper functions to filter and update cart ------ //
 // ADD item to cart or increase quantity
 const addToCart = (cartItems, productToAdd) => {
@@ -9,10 +8,11 @@ const addToCart = (cartItems, productToAdd) => {
         return cartItems.map((cartItem) => cartItem.id === productToAdd.id ?
             { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
         )
-    };
+    }
 
     return [...cartItems, { ...productToAdd, quantity: 1 }]
 };
+
 // REMOVE item from cart or decrease quantity
 const removeFromCart = (cartItems, productToUpdate) => {
     const itemInCart = cartItems.find((cartItem) => cartItem.id === productToUpdate.id);
@@ -26,6 +26,7 @@ const removeFromCart = (cartItems, productToUpdate) => {
         { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
     )
 };
+
 // CLEAR item from cart
 const clearCart = (cartItems, productToClear) => {
     return cartItems.filter(item => (item.id !== productToClear.id))
