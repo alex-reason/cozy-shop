@@ -65,7 +65,11 @@ export const CartProvider = ({ children }) => {
         dispatch({ type: 'OPEN_CLOSE_CART', payload: bool })
     };
 
-    const values = { cartItems, cartOpen, openOrCloseCart, addItemToCart, removeItemFromCart, clearItemFromCart }
+    const emptyCart = () => {
+        dispatch({ type: 'UPDATE_CART', payload: [] })
+    }
+
+    const values = { cartItems, cartOpen, openOrCloseCart, addItemToCart, removeItemFromCart, clearItemFromCart, emptyCart }
 
     return (
         <CartContext.Provider value={values}>

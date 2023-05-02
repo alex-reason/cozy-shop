@@ -39,7 +39,7 @@ const Checkout = () => {
                 </div>
 
             </section>
-            <PaymentForm />
+            { cartTotal < 1 ? <p className='checkout__empty'>Your cart is empty</p> : <PaymentForm /> }
         </>
     )
 }

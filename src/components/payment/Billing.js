@@ -5,7 +5,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Billing = () => {
     const { customerInfo, isReady } = useContext(BillingContext);
-    const { cartItems } = useContext(CartContext);
+    const { cartItems, emptyCart } = useContext(CartContext);
     const cartTotalAmount = cartItems.reduce((acc, currVal) => acc + (currVal.price * currVal.quantity), 0);
     const stripe = useStripe();
     const elements = useElements();
@@ -53,10 +53,10 @@ const Billing = () => {
             console.log(paymentResult.error)
         } else {
             if (paymentResult.paymentIntent.status === "succeeded") {
-                console.log("payment successful")
+                alert("payment successful")
+                emptyCart()
             }
         }
-
     };
 
     return (
