@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { BillingContext } from "../../context/BillingContext";
 import FormInput from "../form-input/FormInput";
-const defaultFormFields = { customerName: '', streetAddress: '', city: '', state: '', zipCode: '' };
 
 const Shipping = () => {
-    const [formFields, setFormFields] = useState(defaultFormFields);
+    const { customerInfo, setCustomerInfo, setIsReady } = useContext(BillingContext);
+    const [formFields, setFormFields] = useState(customerInfo);
     const { customerName, streetAddress, city, state, zipCode } = formFields;
 
     const handleChange = (event) => {
@@ -11,8 +12,15 @@ const Shipping = () => {
         setFormFields({ ...formFields, [name]: value });
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setCustomerInfo(formFields);
+        setIsReady(true);
+        console.log(customerInfo)
+    };
+
     return (
-        <form className='payment-form__form'>
+        <form className='payment-form__form' onSubmit={handleSubmit}>
             <FormInput
                 label='Name'
                 name='customerName'
@@ -52,6 +60,7 @@ const Shipping = () => {
                 onChange={handleChange}
                 required
             />
+            <button className="btn">Confirm Shipping Info</button>
         </form>
     )
 }

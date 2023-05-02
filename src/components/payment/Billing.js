@@ -1,8 +1,15 @@
+import { useContext, useState } from "react";
+import { BillingContext } from "../../context/BillingContext";
+import { CartContext } from '../../context/CartContext2';
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Billing = () => {
+    const { customerInfo, isReady } = useContext(BillingContext);
+    const { cartItems } = useContext(CartContext);
+    const cartTotalAmount = cartItems.reduce((acc, currVal) => acc + (currVal.price * currVal.quantity), 0);
     const stripe = useStripe();
     const elements = useElements();
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const handlePayment = async (e) => {
         e.preventDefault();
@@ -11,23 +18,53 @@ const Billing = () => {
             return;
         }
 
-        const response = await fetch('./netlify/functions/createPaymentIntent', {
+        setIsProcessing(true);
+
+        const response = await fetch('/.netlify/functions/create-payment-intent', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ amount: 10000 })
+            body: JSON.stringify({ amount: cartTotalAmount * 100 })
         }).then(res => res.json());
 
-        console.log(response)
-    }
+        const {
+            paymentIntent: { client_secret },
+        } = response;
+
+        const paymentResult = await stripe.confirmCardPayment(client_secret, {
+            payment_method: {
+                card: elements.getElement(CardElement),
+                billing_details: {
+                    name: customerInfo.customerName,
+                    address: {
+                        line1: customerInfo.streetAddress,
+                        city: customerInfo.city,
+                        state: customerInfo.state,
+                        postal_code: customerInfo.zipCode
+                    }
+                }
+            }
+        });
+
+        setIsProcessing(false);
+
+        if (paymentResult.error) {
+            console.log(paymentResult.error)
+        } else {
+            if (paymentResult.paymentIntent.status === "succeeded") {
+                console.log("payment successful")
+            }
+        }
+
+    };
 
     return (
         <form className='payment-form__card' onSubmit={handlePayment}>
             <CardElement />
-            <button className='btn btn--normal'>Pay now</button>
+            {isReady && <button className='btn btn--normal' disabled={isProcessing}>Pay now</button>}
         </form>
-    )
-}
+    );
+};
 
-export default Billing
+export default Billing;

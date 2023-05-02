@@ -7,7 +7,7 @@ const FormInput = ({ label, ...otherProps }) => {
         <ChakraProvider>
             <FormControl className='form-input'>
                 {label &&
-                    <FormLabel className={`${otherProps.value.length ? 'shrink' : ''} form-input__label`}>
+                    <FormLabel className={`${otherProps.value ? 'shrink' : ''} form-input__label`}>
                         {label}
                     </FormLabel>
                 }
