@@ -1,8 +1,18 @@
+import { ChangeEvent } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { FormControl, FormLabel, Input } from "@chakra-ui/react"
 import './form-input.scss';
 
-const FormInput = ({ label, ...otherProps }) => {
+type FormInputProps = {
+    label: string;
+    value: string;
+    type: string;
+    name: string;
+    required: boolean;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const FormInput = ({ label, ...otherProps }: FormInputProps) => {
     return (
         <ChakraProvider>
             <FormControl className='form-input'>

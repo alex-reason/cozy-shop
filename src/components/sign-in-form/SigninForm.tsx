@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../firebase/config";
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import FormInput from "../form-input/FormInput";
 import './signin-form.scss';
 
@@ -15,15 +16,15 @@ const SigninForm = () => {
     };
 
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<null | string>(null);
     const { email, password } = formFields;
 
-    const handleChange = (event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setError(null);
 
@@ -31,15 +32,10 @@ const SigninForm = () => {
             await signInAuthUserWithEmailAndPassword(email, password);
             navigate('/')
         } catch (err) {
-            switch (err.code) {
-                case 'auth/wrong-password':
-                    setError('incorrect password for email');
-                    break;
-                case 'auth/user-not-found':
-                    setError('no user associated with this email');
-                    break;
-                default:
-                    setError('error logging in')
+            if ((err as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
+                setError('incorrect password for email');
+            } else {
+                setError(`user creation error: ${err}`)
             }
         } finally {
             setFormFields(defaultFormFields)
@@ -59,6 +55,7 @@ const SigninForm = () => {
                     onChange={handleChange}
                     required
                 />
+
                 <FormInput
                     label='Password'
                     type='password'

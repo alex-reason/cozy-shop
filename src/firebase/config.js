@@ -18,7 +18,6 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
-
 // google provider
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
@@ -83,14 +82,17 @@ export const getCategoriesAndDocs = async (category) => {
 //-- google sign in/ sign up -- //
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 //-- sign in/ sign up with email/password-- //
+
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await createUserWithEmailAndPassword(auth, email, password)
 }
+
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password)
 }
+
 // -- sign out -- //
 export const signOutUser = async () => await signOut(auth);
 // listen to auth changes
